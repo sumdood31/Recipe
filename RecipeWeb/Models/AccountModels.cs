@@ -18,7 +18,7 @@ namespace RecipeWeb.Models
         public DbSet<UserProfile> UserProfiles { get; set; }
     }
 
-    [Table("UserProfile")]
+    [System.ComponentModel.DataAnnotations.Schema.Table("UserProfile")]
     public class UserProfile
     {
         [Key]
