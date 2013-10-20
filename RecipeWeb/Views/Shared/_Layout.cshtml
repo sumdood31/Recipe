@@ -180,7 +180,7 @@
     </script>
 </head>
 <body>
-    @RenderBody()
+ 
     <div>
         <h1>Hey, Weekly Menu</h1>
         <div style="width:100%; clear:both">
@@ -207,7 +207,7 @@
             </div><br /><br />
             <a href="#" id="clearWeek">clear week</a>
         </div>
-        <div style="float:left; width:400px;">
+        <div style="float:left; width:400px; margin-bottom:15px;">
             <div id="dailyAccordion">
 	            <h3 class="dailySection" dayId="1">Monday</h3>
 	            <div>
@@ -391,7 +391,7 @@
 	            </div>
             </div>
         </div>
-        <div style="float:right; width:400px;">
+        <div style="float:left; width:400px; margin-left:15px;">
             <div id="tabs">
 	            <ul>
 		            <li><a href="#tabs-1">Spring</a></li>
@@ -568,5 +568,6 @@
             </div>
         </div>
     </div>
+       @RenderBody()
 </body>
 </html>

@@ -66,3 +66,5 @@ C:\JT-Workspace\Recipe\RecipeWeb\bin\Microsoft.Web.WebPages.OAuth.xml
 C:\JT-Workspace\Recipe\RecipeWeb\bin\WebMatrix.WebData.xml
 C:\JT-Workspace\Recipe\RecipeWeb\obj\Debug\RecipeWeb.dll
 C:\JT-Workspace\Recipe\RecipeWeb\obj\Debug\RecipeWeb.pdb
+D:\VSProjects\GitHub\Recipe\RecipeWeb\bin\EntityFramework.dll
+D:\VSProjects\GitHub\Recipe\RecipeWeb\bin\EntityFramework.xml

@@ -246,5 +246,102 @@ namespace RecipeWeb.Controllers
 
             return Json(data);
         }
+
+        public ActionResult AddRecipe(Recipe recipe)
+        {
+            var data = new object();
+            recipe.DateCreated = DateTime.Now;
+
+            try
+            {
+                using (var db = new DIYFE.EF.DIYFEEntities())
+                {
+                    
+                    db.Entry(recipe).State = System.Data.EntityState.Added;
+                    db.SaveChanges();
+                }
+
+                data = new { success = true, newRecipe = recipe };
+            }
+            catch (Exception ex)
+            {
+                if (ex.InnerException.Message != null)
+                {
+                    data = new { success = false, message = ex.Message + " " + ex.InnerException + " Another reason why EF sucks" };
+                }
+                else
+                {
+                    data = new { success = false, message = ex.Message + " Another reason why EF sucks" };
+                }
+                return Json(data);
+
+            }
+
+            return Json(data);
+        }
+
+        public ActionResult AddRecipeSeason(RecipeSeason season)
+        {
+            var data = new object();
+            
+            try
+            {
+                using (var db = new DIYFE.EF.DIYFEEntities())
+                {
+
+                    db.Entry(season).State = System.Data.EntityState.Added;
+                    db.SaveChanges();
+                }
+
+                data = new { success = true, newSeason = season };
+            }
+            catch (Exception ex)
+            {
+                if (ex.InnerException.Message != null)
+                {
+                    data = new { success = false, message = ex.Message + " " + ex.InnerException + " Another reason why EF sucks" };
+                }
+                else
+                {
+                    data = new { success = false, message = ex.Message + " Another reason why EF sucks" };
+                }
+                return Json(data);
+
+            }
+
+            return Json(data);
+        }
+
+        public ActionResult AddRecipeIngredient(RecipeIngredient ingredient)
+        {
+            var data = new object();
+            ingredient.DateCreated = DateTime.Now;
+            try
+            {
+                using (var db = new DIYFE.EF.DIYFEEntities())
+                {
+
+                    db.Entry(ingredient).State = System.Data.EntityState.Added;
+                    db.SaveChanges();
+                }
+
+                data = new { success = true, newRecipeIngredient = ingredient };
+            }
+            catch (Exception ex)
+            {
+                if (ex.InnerException.Message != null)
+                {
+                    data = new { success = false, message = ex.Message + " " + ex.InnerException + " Another reason why EF sucks" };
+                }
+                else
+                {
+                    data = new { success = false, message = ex.Message + " Another reason why EF sucks" };
+                }
+                return Json(data);
+
+            }
+
+            return Json(data);
+        }
     }
 }

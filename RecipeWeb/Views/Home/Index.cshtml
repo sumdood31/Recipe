@@ -1,1 +1,179 @@
-﻿
+﻿@{
+    ViewBag.Title = "Contact";
+}
+
+<script type="text/javascript">
+    $(document).ready(function () {
+
+        $('#recipeAdd').click(function () {
+
+            var item = $(this).parent();
+            var recipeAdd = {
+                Name: $('#recipeName').val(),
+                Instructions: $('#recipeInstruction').val(),
+                UseAmount: $('#recipeUserAmount').val()
+            }
+            $.ajax({
+                url: 'home/AddRecipe',
+                data: JSON.stringify(recipeAdd),
+                type: 'POST',
+                contentType: 'application/json; charset=utf-8',
+                success: function (data) {
+                    if (data.success) {
+
+                        $('#recipeId').val(data.newRecipe.RecipeId);
+                        
+                    } else {
+                        //show error
+                        alert(data.message);
+                        mediator.publish('pageError', { error: data.message, method: 'Insert Article' });
+                    }
+                },
+                error: function () {
+                    alert('err');
+                }
+            });
+
+            return false;
+        });
+
+        $('#seasionRecipeAdd').click(function(){
+         var item = $(this).parent();
+         var recipeSeasion = {
+            SeasonId: $('#seasonId').val(),
+            RecipeId: $('#recipeId').val()
+        }
+        $.ajax({
+            url: 'home/AddRecipeSeason',
+            data: JSON.stringify(recipeSeasion),
+            type: 'POST',
+            contentType: 'application/json; charset=utf-8',
+            success: function (data) {
+                if (data.success) {
+
+                    $('#newSeasonRecipe').append(data.newSeason.RecipeSeasonId);
+                        
+                } else {
+                    //show error
+                    alert(data.message);
+                    mediator.publish('pageError', { error: data.message, method: 'Insert Article' });
+                }
+            },
+            error: function () {
+                alert('err');
+            }
+        });
+
+        return false;
+        });
+
+        $('#recipeIngredientAdd').click(function () {
+            var item = $(this).parent();
+            var recipeIngredient = {
+                RecipeId: $('#recipeId').val(),
+                IngredientId: $('#ingredientId').val(),
+                Discription: $('#ingredientDiscription').val(),
+                Quantity: $('#ingredientQuantity').val(),
+                QuantityUnit: $('#ingredientQuantityUnit').val()
+            }
+            $.ajax({
+                url: 'home/AddRecipeIngredient',
+                data: JSON.stringify(recipeIngredient),
+                type: 'POST',
+                contentType: 'application/json; charset=utf-8',
+                success: function (data) {
+                    if (data.success) {
+
+                        $('#recipeIngredents').append(data.newRecipeIngredient.IngredientId );
+
+                    } else {
+                        //show error
+                        alert(data.message);
+                        mediator.publish('pageError', { error: data.message, method: 'Insert Article' });
+                    }
+                },
+                error: function () {
+                    alert('err');
+                }
+            });
+
+            return false;
+        });
+
+        $('#ingredientAdd').click(function () {
+            var item = $(this).parent();
+            var newIngredient = {
+                Name: $('#ingredientName').val()
+            }
+            $.ajax({
+                url: 'home/AddIngredient',
+                data: JSON.stringify(recipeIngredient),
+                type: 'POST',
+                contentType: 'application/json; charset=utf-8',
+                success: function (data) {
+                    if (data.success) {
+
+                        $('#recipeIngredents').append(data.newRecipeIngredient.IngredientId);
+
+                    } else {
+                        //show error
+                        alert(data.message);
+                        mediator.publish('pageError', { error: data.message, method: 'Insert Article' });
+                    }
+                },
+                error: function () {
+                    alert('err');
+                }
+            });
+
+            return false;
+        });
+
+    });
+</script>
+
+<div style="clear:both;padding-top:20px;">
+
+    <h2>Add Recipe</h2>
+    <div id="addRecipe">
+        <ul>
+            <li>Name: <input type="text" id="recipeName" /></li>
+            <li>Instruction: <input type="text" id="recipeInstruction" /></li>
+            <li>Use Amount: <input type="text" id="recipeUseAmount" value="0" /></li>
+            <li><input type="button" id="recipeAdd" value="add recipe" /></li>
+        </ul>
+        recipe Id: <input type="text" id="recipeId" />
+    </div>
+    <div id="addRecipeSeason">
+        <h2>Recipe Season</h2>
+        <ul>
+            <li>SeasionId: <input type="text" id="seasonId" /></li>
+            <li><input type="button" id="seasionRecipeAdd" value="add season recipe" /></li>
+        </ul>
+        <div id="newSeasonRecipe"></div>
+    </div>
+    <div id="addRecipeIngredent">
+        <h2>Recipe Ingredent</h2>
+        <ul>
+            <li>Ingredent Id: <input type="text" id="ingredientId" /></li>
+            <li>Discription: <input type="text" id="ingredientDiscription" /></li>
+            <li>Quantity: <input type="text" id="ingredientQuantity" /></li>
+            <li>Quantity Unit: <input type="text" id="ingredientQuantityUnit" /></li>
+            <li><input type="button" id="recipeIngredientAdd" value="add recipe ingredient" /></li>
+        </ul>
+        <div id="recipeIngredents">
+
+        </div>
+            
+    </div>
+    <div id="addIngredent">
+        <ul>
+            <li>Ingredent Name: <input type="text" id="ingredientName" /></li>
+            <li><input type="button" id="ingredientAdd" value="add ingredient" /></li>
+        </ul>
+        <div id="ingredents">
+
+        </div>
+         
+    </div>
+</div>
