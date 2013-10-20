@@ -25,6 +25,7 @@ namespace RecipeWeb.Controllers
                 Model.ShoppingList = db.IngredientShoppings.ToList();
                 Model.DailyRecipes = db.DailyRecipes.ToList();
                 Model.SeasonalRecipes = db.SeasonalRecipes.ToList();
+                Model.Ingredients = db.Ingredients.OrderBy(i => i.Name).ToList();
             }
 
             return View(Model);
@@ -326,6 +327,38 @@ namespace RecipeWeb.Controllers
                 }
 
                 data = new { success = true, newRecipeIngredient = ingredient };
+            }
+            catch (Exception ex)
+            {
+                if (ex.InnerException.Message != null)
+                {
+                    data = new { success = false, message = ex.Message + " " + ex.InnerException + " Another reason why EF sucks" };
+                }
+                else
+                {
+                    data = new { success = false, message = ex.Message + " Another reason why EF sucks" };
+                }
+                return Json(data);
+
+            }
+
+            return Json(data);
+        }
+
+        public ActionResult AddIngredient(Ingredient ingredient)
+        {
+            var data = new object();
+  
+            try
+            {
+                using (var db = new DIYFE.EF.DIYFEEntities())
+                {
+
+                    db.Entry(ingredient).State = System.Data.EntityState.Added;
+                    db.SaveChanges();
+                }
+
+                data = new { success = true, newIngredient = ingredient };
             }
             catch (Exception ex)
             {

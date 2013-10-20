@@ -12,5 +12,6 @@ namespace RecipeWeb.Models
         public List<IngredientShopping> ShoppingList = new List<IngredientShopping>();
         public List<DailyRecipe> DailyRecipes = new List<DailyRecipe>();
         public List<SeasonalRecipe> SeasonalRecipes = new List<SeasonalRecipe>();
+        public List<Ingredient> Ingredients = new List<Ingredient>();
     }
 }

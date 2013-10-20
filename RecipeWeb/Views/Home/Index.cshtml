@@ -107,13 +107,13 @@
             }
             $.ajax({
                 url: 'home/AddIngredient',
-                data: JSON.stringify(recipeIngredient),
+                data: JSON.stringify(newIngredient),
                 type: 'POST',
                 contentType: 'application/json; charset=utf-8',
                 success: function (data) {
                     if (data.success) {
 
-                        $('#recipeIngredents').append(data.newRecipeIngredient.IngredientId);
+                        $('#ingredents').append(data.newIngredient.IngredientId + " " + data.newIngredient.Name);
 
                     } else {
                         //show error
@@ -132,7 +132,7 @@
     });
 </script>
 
-<div style="clear:both;padding-top:20px;">
+<div style="clear:both;padding-top:20px; float:left;">
 
     <h2>Add Recipe</h2>
     <div id="addRecipe">

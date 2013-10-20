@@ -569,5 +569,14 @@
         </div>
     </div>
        @RenderBody()
+    <div style="float:left;">
+    <ul>
+        @foreach (DIYFE.EF.Ingredient gredient in Model.Ingredients)
+        {
+            <li>@gredient.IngredientId @gredient.Name</li>
+        }
+    </ul>
+
+    </div>
 </body>
 </html>
