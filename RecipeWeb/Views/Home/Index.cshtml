@@ -128,11 +128,22 @@
 
             return false;
         });
-
+        $("#searchIngredient").autocomplete({
+            source: "Home/SearchIngredient",
+            minLength: 2,
+            select: function (event, ui) {
+                $('#ingredientId').val(ui.item.id);
+                //log(ui.item ?
+                //"Selected: " + ui.item.value + " aka " + ui.item.id :
+                //"Nothing selected, input was " + this.value);
+            }
+        });
     });
 </script>
 
-<div style="clear:both;padding-top:20px; float:left;">
+<div style="clear:both;padding-top:50px; float:left;">
+    <h2>Add New Recipe</h2>
+<div style="clear:both;padding-top:5px; float:left;">
 
     <h2>Add Recipe</h2>
     <div id="addRecipe">
@@ -142,12 +153,13 @@
             <li>Use Amount: <input type="text" id="recipeUseAmount" value="0" /></li>
             <li><input type="button" id="recipeAdd" value="add recipe" /></li>
         </ul>
-        recipe Id: <input type="text" id="recipeId" />
+        : Important, changing this will change the recipe that is used bellow for all additions <br />
+        recipe Id: <input type="text" id="recipeId" /> 
     </div>
     <div id="addRecipeSeason">
         <h2>Recipe Season</h2>
         <ul>
-            <li>SeasionId: <input type="text" id="seasonId" /></li>
+            <li>SeasionId: <input type="text" id="seasonId" value="5" /></li>
             <li><input type="button" id="seasionRecipeAdd" value="add season recipe" /></li>
         </ul>
         <div id="newSeasonRecipe"></div>
@@ -155,6 +167,7 @@
     <div id="addRecipeIngredent">
         <h2>Recipe Ingredent</h2>
         <ul>
+            <li>find ingredent: <input type="text" id="searchIngredient" /></li>
             <li>Ingredent Id: <input type="text" id="ingredientId" /></li>
             <li>Discription: <input type="text" id="ingredientDiscription" /></li>
             <li>Quantity: <input type="text" id="ingredientQuantity" /></li>
@@ -167,6 +180,7 @@
             
     </div>
     <div id="addIngredent">
+        <h2>Add New Ingredent That Is Not In The List</h2>
         <ul>
             <li>Ingredent Name: <input type="text" id="ingredientName" /></li>
             <li><input type="button" id="ingredientAdd" value="add ingredient" /></li>
@@ -177,3 +191,4 @@
          
     </div>
 </div>
+    </div>

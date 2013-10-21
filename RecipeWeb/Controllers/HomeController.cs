@@ -353,7 +353,7 @@ namespace RecipeWeb.Controllers
             {
                 using (var db = new DIYFE.EF.DIYFEEntities())
                 {
-
+                    
                     db.Entry(ingredient).State = System.Data.EntityState.Added;
                     db.SaveChanges();
                 }
@@ -375,6 +375,41 @@ namespace RecipeWeb.Controllers
             }
 
             return Json(data);
+        }
+
+        public class SearchResult
+        {
+            public int id { get; set; }
+            public string label { get; set; }
+        }
+
+        
+        public ActionResult SearchIngredient(string term)
+        {
+             
+             List<SearchResult> results = new List<SearchResult>();
+             System.Text.RegularExpressions.Regex regex = new System.Text.RegularExpressions.Regex("("+term+")");
+
+            try
+            {
+                using (var db = new DIYFE.EF.DIYFEEntities())
+                {
+                    results = db.Ingredients.Where(i => i.Name.Contains(term)).Select(it => new SearchResult
+                    {
+                        id= it.IngredientId,
+                        label = it.Name
+                    }).ToList();
+                   
+                    
+                }
+            }
+            catch (Exception ex)
+            {
+                
+            }
+
+            return Json(results, JsonRequestBehavior.AllowGet);
+           
         }
     }
 }

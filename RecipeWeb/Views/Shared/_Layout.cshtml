@@ -391,7 +391,7 @@
 	            </div>
             </div>
         </div>
-        <div style="float:left; width:400px; margin-left:15px;">
+        <div style="float:left; width:500px; margin-left:15px;">
             <div id="tabs">
 	            <ul>
 		            <li><a href="#tabs-1">Spring</a></li>
@@ -399,6 +399,8 @@
 		            <li><a href="#tabs-3">Fall</a></li>
                     <li><a href="#tabs-4">Winter</a></li>
                     <li><a href="#tabs-5">All</a></li>
+                    <li><a href="#tabs-6">Sides</a></li>
+                    <li><a href="#tabs-7">Snacks</a></li>
 	            </ul>
 	            <div id="tabs-1">
 		            <div class="accordion">
@@ -565,15 +567,82 @@
                         }
                   </div>
                 </div>
+                <div id="tabs-6">
+		            <div class="accordion">
+                        @foreach (var ar in Model.SeasonalRecipes.Where(s => s.SeasonId == 6)
+                            .GroupBy(x => new { x.Name, x.RecipeId, x.Instructions }))
+                        {
+
+                            //DIYFE.EF.SeasonalRecipe ar
+                        <h3>@ar.Key.Name</h3>
+	                        <div>
+                                <div class="addToDaily">
+                                   <select class="daySelection">
+                                       <option id="1">Monday</option>
+                                       <option id="2">Tuesday</option>
+                                       <option id="3">Wensday</option>
+                                       <option id="4">Thursday</option>
+                                       <option id="5">Friday</option>
+                                       <option id="6">Saturday</option>
+                                       <option id="7">Sunday</option>
+                                   </select>  <a href="#" recipeId="@ar.Key.RecipeId" class="addToDay">Add To Day</a>
+                                </div>
+                                 @foreach (DIYFE.EF.SeasonalRecipe ingredient in Model.SeasonalRecipes.Where(q => q.RecipeId == ar.Key.RecipeId && q.SeasonId == 5).OrderBy(q1 => q1.IngredientId))
+                                 {
+                                    <ul>
+                                        <li>@ingredient.Quantity @ingredient.QuantityUnit @ingredient.IngredientName @ingredient.Discription </li>
+                                    </ul>
+                                 }
+
+                                @Html.Raw(ar.Key.Instructions)
+
+	                        </div>                            
+                        }
+                  </div>
+                </div>
+                <div id="tabs-7">
+		            <div class="accordion">
+                        @foreach (var ar in Model.SeasonalRecipes.Where(s => s.SeasonId == 7)
+                            .GroupBy(x => new { x.Name, x.RecipeId, x.Instructions }))
+                        {
+
+                            //DIYFE.EF.SeasonalRecipe ar
+                        <h3>@ar.Key.Name</h3>
+	                        <div>
+                                <div class="addToDaily">
+                                   <select class="daySelection">
+                                       <option id="1">Monday</option>
+                                       <option id="2">Tuesday</option>
+                                       <option id="3">Wensday</option>
+                                       <option id="4">Thursday</option>
+                                       <option id="5">Friday</option>
+                                       <option id="6">Saturday</option>
+                                       <option id="7">Sunday</option>
+                                   </select>  <a href="#" recipeId="@ar.Key.RecipeId" class="addToDay">Add To Day</a>
+                                </div>
+                                 @foreach (DIYFE.EF.SeasonalRecipe ingredient in Model.SeasonalRecipes.Where(q => q.RecipeId == ar.Key.RecipeId && q.SeasonId == 5).OrderBy(q1 => q1.IngredientId))
+                                 {
+                                    <ul>
+                                        <li>@ingredient.Quantity @ingredient.QuantityUnit @ingredient.IngredientName @ingredient.Discription </li>
+                                    </ul>
+                                 }
+
+                                @Html.Raw(ar.Key.Instructions)
+
+	                        </div>                            
+                        }
+                  </div>
+                </div>
             </div>
         </div>
     </div>
        @RenderBody()
-    <div style="float:left;">
+    <div style="float:left; padding-top:90px;">
+        follow nameing
     <ul>
         @foreach (DIYFE.EF.Ingredient gredient in Model.Ingredients)
         {
-            <li>@gredient.IngredientId @gredient.Name</li>
+            <li>ID: @gredient.IngredientId Name:@gredient.Name</li>
         }
     </ul>
 
